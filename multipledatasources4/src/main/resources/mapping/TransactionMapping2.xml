@@ -4,8 +4,9 @@
 
 	<insert id="save" parameterType="com.mzd.multipledatasources.bean.TeachersBean">
 		insert into
-		cs_teacher
-		values(#{id},#{teachername},#{classid})
+		test3
+		values(#{classid},#{id},#{teachername})
+
 	</insert>
 
 </mapper>

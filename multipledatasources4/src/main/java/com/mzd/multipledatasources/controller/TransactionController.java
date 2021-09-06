@@ -1,16 +1,14 @@
 package com.mzd.multipledatasources.controller;
 
-import java.util.UUID;
-
+import com.mzd.multipledatasources.bean.TeachersBean;
+import com.mzd.multipledatasources.bean.TestBean;
+import com.mzd.multipledatasources.service.TransactionService1;
+import com.mzd.multipledatasources.service.TransactionService2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mzd.multipledatasources.bean.TeachersBean;
-import com.mzd.multipledatasources.bean.TestBean;
-import com.mzd.multipledatasources.dao.TransactionDao2;
-import com.mzd.multipledatasources.service.TransactionService1;
-import com.mzd.multipledatasources.service.TransactionService2;
+import java.util.UUID;
 
 /**
  * 多数据源事务测试
@@ -29,9 +27,9 @@ public class TransactionController {
 	public String savetest() {
 		TestBean tb = new TestBean();
 		tb.setId(UUID.randomUUID().toString().replaceAll("-", ""));
-		tb.setScore(70);
+		tb.setScore(71);
 		tb.setClassid("1");
-		tb.setUserid("a");
+		tb.setUserid("22");
 		ts1.test01_saveTestBean(tb);
 		return "success";
 	}
@@ -40,8 +38,8 @@ public class TransactionController {
 	public String saveteacher() {
 		TeachersBean tb = new TeachersBean();
 		tb.setId(UUID.randomUUID().toString().replaceAll("-", ""));
-		tb.setTeachername("王老师");
-		tb.setClassid("1");
+		tb.setTeachername("2");
+		tb.setClassid("11");
 		ts2.test02_saveTeachersBean(tb);
 		return "success";
 	}

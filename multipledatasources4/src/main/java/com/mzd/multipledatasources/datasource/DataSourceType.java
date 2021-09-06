@@ -3,7 +3,10 @@ package com.mzd.multipledatasources.datasource;
 public class DataSourceType {
 
 	public enum DataBaseType {
-		TEST01, TEST02
+		/**
+		 *
+		 */
+		TEST01, TEST02;
 	}
 
 	// 使用ThreadLocal保证线程安全
