@@ -23,7 +23,7 @@ public class TransactionController {
 	@Autowired
 	private TransactionService2 ts2;
 
-	@RequestMapping("/savetest.do")
+	@RequestMapping("/savetest")
 	public String savetest() {
 		TestBean tb = new TestBean();
 		tb.setId(UUID.randomUUID().toString().replaceAll("-", ""));
@@ -34,7 +34,7 @@ public class TransactionController {
 		return "success";
 	}
 
-	@RequestMapping("/saveteacher.do")
+	@RequestMapping("/saveteacher")
 	public String saveteacher() {
 		TeachersBean tb = new TeachersBean();
 		tb.setId(UUID.randomUUID().toString().replaceAll("-", ""));
