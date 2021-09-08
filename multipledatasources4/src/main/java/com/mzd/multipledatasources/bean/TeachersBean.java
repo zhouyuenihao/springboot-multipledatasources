@@ -1,6 +1,8 @@
 package com.mzd.multipledatasources.bean;
 
-public class TeachersBean {
+import java.io.Serializable;
+
+public class TeachersBean implements Serializable {
 
 	private String id;
 	private String teachername;

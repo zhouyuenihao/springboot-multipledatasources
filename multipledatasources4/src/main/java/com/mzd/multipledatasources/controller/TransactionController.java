@@ -8,6 +8,7 @@ import com.mzd.multipledatasources.mapper.TransactionMapping2;
 import com.mzd.multipledatasources.service.TransactionService1;
 import com.mzd.multipledatasources.service.TransactionService2;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,7 +29,7 @@ public class TransactionController {
 	@Autowired
 	private TransactionService2 ts2;
 	@Autowired
-	private SqlSession sqlSession;
+	private SqlSessionFactory sqlSessionFactory;
 	@Autowired
 	private ObjectMapper objectMapper;
 
@@ -50,7 +51,11 @@ public class TransactionController {
 		tb.setTeachername("2");
 		tb.setClassid("11");
 		//ts2.test02_saveTeachersBean(tb);
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		SqlSession sqlSession1 = sqlSessionFactory.openSession();
 		List<TeachersBean> list = sqlSession.getMapper(TransactionMapping2.class).select();
+		sqlSession.close();
+		List<TeachersBean> list1 = sqlSession1.getMapper(TransactionMapping2.class).select();
 		return objectMapper.writeValueAsString(list);
 	}
 
