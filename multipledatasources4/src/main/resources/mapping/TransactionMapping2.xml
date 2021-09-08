@@ -8,5 +8,8 @@
 		values(#{classid},#{id},#{teachername})
 
 	</insert>
+	<select id="select" resultType="com.mzd.multipledatasources.bean.TeachersBean">
+		select * from test3
+	</select>
 
 </mapper>
