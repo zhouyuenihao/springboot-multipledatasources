@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class TransactionService1 {
 
@@ -15,6 +17,10 @@ public class TransactionService1 {
 	@Transactional
 	public void test01_saveTestBean(TestBean t) {
 		tm1.save(t);
+	}
+
+	public List<TestBean> select() {
+		return tm1.select();
 	}
 
 }

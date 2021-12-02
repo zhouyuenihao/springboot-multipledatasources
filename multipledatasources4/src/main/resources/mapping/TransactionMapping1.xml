@@ -6,4 +6,9 @@
 		values(#{score},#{id},
 		#{userid})
 	</insert>
+
+
+	<select id="select" resultType="com.mzd.multipledatasources.bean.TestBean">
+		select * from test3
+	</select>
 </mapper>

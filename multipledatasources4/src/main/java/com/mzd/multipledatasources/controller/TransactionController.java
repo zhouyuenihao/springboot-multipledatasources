@@ -10,6 +10,7 @@ import com.mzd.multipledatasources.service.TransactionService2;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -50,14 +51,30 @@ public class TransactionController {
 		tb.setId(UUID.randomUUID().toString().replaceAll("-", ""));
 		tb.setTeachername("2");
 		tb.setClassid("11");
-		//ts2.test02_saveTeachersBean(tb);
+		ts2.test02_saveTeachersBean(tb);
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		SqlSession sqlSession1 = sqlSessionFactory.openSession();
 		List<TeachersBean> list = sqlSession.getMapper(TransactionMapping2.class).select();
-		sqlSession.close();
+		System.out.println(objectMapper.writeValueAsString(list));
+		//sqlSession.close();
 		List<TeachersBean> list1 = sqlSession1.getMapper(TransactionMapping2.class).select();
+		System.out.println(objectMapper.writeValueAsString(list1));
 		return objectMapper.writeValueAsString(list);
 	}
 
+	@GetMapping("twoDataSource")
+	public void twoDataSource() throws JsonProcessingException {
+		List<TestBean> select = ts1.select();
+		System.out.println("数据库1"+objectMapper.writeValueAsString(select));
+		List<TeachersBean> select1 = ts2.select();
+		System.out.println("数据库2"+objectMapper.writeValueAsString(select1));
+	}
+
+	@GetMapping("twoDataSource1")
+	public void twoDataSource1() throws JsonProcessingException {
+
+		List<TeachersBean> select1 = ts2.select();
+		System.out.println("数据库2"+objectMapper.writeValueAsString(select1));
+	}
 	
 }

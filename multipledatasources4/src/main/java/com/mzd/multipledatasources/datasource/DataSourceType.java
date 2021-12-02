@@ -1,5 +1,8 @@
 package com.mzd.multipledatasources.datasource;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class DataSourceType {
 
 	public enum DataBaseType {
@@ -31,6 +34,14 @@ public class DataSourceType {
 	// 清空数据类型
 	public static void clearDataBaseType() {
 		TYPE.remove();
+	}
+
+	public static void main(String[] args) {
+		Map<String, String> map = new HashMap(1);
+		map.put("123","1");
+		String b = map.get("123");
+		System.out.println("1"== b);
+		System.out.println("2" =="2");
 	}
 
 }
