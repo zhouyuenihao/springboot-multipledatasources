@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mzd.multipledatasources.bean.TeachersBean;
 import com.mzd.multipledatasources.bean.TestBean;
+import com.mzd.multipledatasources.datasource.DataSourceType;
 import com.mzd.multipledatasources.mapper.TransactionMapping2;
 import com.mzd.multipledatasources.service.TransactionService1;
 import com.mzd.multipledatasources.service.TransactionService2;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
 
@@ -34,6 +36,23 @@ public class TransactionController {
 	@Autowired
 	private ObjectMapper objectMapper;
 
+	/**
+	 * https://blog.csdn.net/qq_25223941/article/details/110160360
+	 * sqlSession执行原生sql
+	 * @throws SQLException
+	 */
+	@GetMapping("test")
+	public void aa() throws SQLException {
+		DataSourceType.resolveKey("a");
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		sqlSession.getConnection().prepareStatement("INSERT INTO `user`(`id`, `name`, `sex`) VALUES (14, '小明', '难222')").execute();
+		//int insert = sqlSession.insert("INSERT INTO `vts-mos`.`user`(`id`, `name`, `sex`) VALUES (6, '小明', '难222');\n");
+		DataSourceType.resolveKey("b");
+		SqlSession sqlSession1 = sqlSessionFactory.openSession();
+		sqlSession1.getConnection().prepareStatement("INSERT INTO `t_person`(`name`, `email`, `password`, `phone`, `id`) VALUES ('张三哥2aa', '657@qq.comaa', '123456', '159238aa', NULL)").execute();
+		//int insert1 = sqlSession1.insert("INSERT INTO `mos-news`.`t_person`(`name`, `email`, `password`, `phone`, `id`) VALUES ('张三哥2aa', '657@qq.comaa', '123456', '159238aa', NULL);\n");
+		System.out.println("aa");
+	}
 	@RequestMapping("/savetest")
 	public String savetest() {
 		TestBean tb = new TestBean();

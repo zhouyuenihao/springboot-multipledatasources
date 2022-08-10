@@ -42,6 +42,18 @@ public class DataSourceType {
 		String b = map.get("123");
 		System.out.println("1"== b);
 		System.out.println("2" =="2");
+		TYPE.set(DataSourceType.DataBaseType.TEST01);
+		System.out.println(TYPE.get());
+		TYPE.set(DataSourceType.DataBaseType.TEST02);
+		System.out.println(TYPE.get());
+	}
+
+	public static void resolveKey(String lookupKey) {
+		if ("a".equals(lookupKey)) {
+			DataSourceType.setDataBaseType((DataSourceType.DataBaseType.TEST01));
+		} else if ("b".equals(lookupKey)) {
+			DataSourceType.setDataBaseType((DataSourceType.DataBaseType.TEST02));
+		}
 	}
 
 }
