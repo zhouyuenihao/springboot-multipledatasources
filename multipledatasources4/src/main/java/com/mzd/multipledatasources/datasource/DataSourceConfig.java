@@ -1,8 +1,10 @@
 package com.mzd.multipledatasources.datasource;
 
+import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -24,6 +26,9 @@ import java.util.Map;
 @MapperScan(basePackages = "com.mzd.multipledatasources.mapper", sqlSessionFactoryRef = "SqlSessionFactory")
 @EnableConfigurationProperties(Config.class)
 public class DataSourceConfig {
+
+    @Autowired
+    private Interceptor[] interceptors;
     /*@Primary
     @Bean(name = "test1DataSource")
     @ConfigurationProperties(prefix = "spring.datasource.test1")
@@ -62,6 +67,7 @@ public class DataSourceConfig {
             throws Exception {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dynamicDataSource);
+        bean.setPlugins(interceptors);
         bean.setMapperLocations(
                 new PathMatchingResourcePatternResolver().getResources("classpath*:mapping/*.xml"));
         return bean.getObject();

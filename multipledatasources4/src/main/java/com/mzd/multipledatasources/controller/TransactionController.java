@@ -5,7 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mzd.multipledatasources.bean.TeachersBean;
 import com.mzd.multipledatasources.bean.TestBean;
 import com.mzd.multipledatasources.datasource.DataSourceType;
+import com.mzd.multipledatasources.entity.User;
+import com.mzd.multipledatasources.mapper.PersonMapper;
 import com.mzd.multipledatasources.mapper.TransactionMapping2;
+import com.mzd.multipledatasources.mapper.UserMapper;
 import com.mzd.multipledatasources.service.TransactionService1;
 import com.mzd.multipledatasources.service.TransactionService2;
 import org.apache.ibatis.session.SqlSession;
@@ -94,6 +97,17 @@ public class TransactionController {
 
 		List<TeachersBean> select1 = ts2.select();
 		System.out.println("数据库2"+objectMapper.writeValueAsString(select1));
+	}
+
+	@Autowired
+	PersonMapper personMapper;
+	@Autowired
+	UserMapper userMapper;
+
+	@GetMapping("test2")
+	public void test2() {
+		userMapper.save(new User());
+		personMapper.selectAll().forEach(x-> System.out.println(x.toString()));
 	}
 	
 }
