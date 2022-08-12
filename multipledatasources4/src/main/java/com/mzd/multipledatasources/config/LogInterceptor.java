@@ -62,8 +62,13 @@ public class LogInterceptor implements Interceptor {
         if (mappedStatement.getSqlCommandType().equals(SqlCommandType.SELECT)) {
             DataSourceType.setDataBaseType((DataSourceType.DataBaseType.TEST02));
         }
-
-        return invocation.proceed();
+        Object result;
+        try {
+            result = invocation.proceed();
+        } finally {
+            DataSourceType.clearDataBaseType();
+        }
+        return result;
     }
 
     /**
