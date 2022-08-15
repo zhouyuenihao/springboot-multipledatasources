@@ -52,5 +52,8 @@ public class AtomikosDataSourceConfig2 {
 			@Qualifier("test2SqlSessionFactory") SqlSessionFactory sessionfactory) {
 		return new SqlSessionTemplate(sessionfactory);
 	}
+	/**
+	 * https://www.cnblogs.com/dw3306/p/15605555.html
+	 */
 
 }
